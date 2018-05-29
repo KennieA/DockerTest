@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+  admin:
+    image: admin:dev
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_PACKAGES=C:\.nuget\packages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_admin$
+    volumes:
+      - C:\Users\Kennie\source\repos\MessageProcessor\Admin:C:\app
+      - C:\Users\Kennie\onecoremsvsmon:C:\remote_debugger:ro
+#$nuget_volume_mapping_admin$
+    entrypoint: C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "\"C:\\Program Files\\dotnet\\dotnet.exe\""
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_admin$ bin\\Debug\\netcoreapp2.0\\Admin.dll"
+      com.microsoft.visualstudio.debuggee.workingdirectory: "C:\\app"
+      com.microsoft.visualstudio.debuggee.killprogram: "C:\\remote_debugger\\x64\\utils\\KillProcess.exe dotnet.exe"
+
+  api:
+    image: api:dev
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_PACKAGES=C:\.nuget\packages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_api$
+    volumes:
+      - C:\Users\Kennie\source\repos\MessageProcessor\api:C:\app
+      - C:\Users\Kennie\onecoremsvsmon:C:\remote_debugger:ro
+#$nuget_volume_mapping_api$
+    entrypoint: C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "\"C:\\Program Files\\dotnet\\dotnet.exe\""
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_api$ bin\\Debug\\netcoreapp2.0\\api.dll"
+      com.microsoft.visualstudio.debuggee.workingdirectory: "C:\\app"
+      com.microsoft.visualstudio.debuggee.killprogram: "C:\\remote_debugger\\x64\\utils\\KillProcess.exe dotnet.exe"
+
+
+  messageprocessor:
+    image: messageprocessor:dev
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_PACKAGES=C:\.nuget\packages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_messageprocessor$
+    volumes:
+      - C:\Users\Kennie\source\repos\MessageProcessor\MessageProcessor:C:\app
+      - C:\Users\Kennie\onecoremsvsmon:C:\remote_debugger:ro
+#$nuget_volume_mapping_messageprocessor$
+    entrypoint: C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "\"C:\\Program Files\\dotnet\\dotnet.exe\""
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_messageprocessor$ bin\\Debug\\netcoreapp2.0\\MessageProcessor.dll"
+      com.microsoft.visualstudio.debuggee.workingdirectory: "C:\\app"
+      com.microsoft.visualstudio.debuggee.killprogram: "C:\\remote_debugger\\x64\\utils\\KillProcess.exe dotnet.exe"
+
+
+  screen:
+    image: screen:dev
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_PACKAGES=C:\.nuget\packages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_screen$
+    volumes:
+      - C:\Users\Kennie\source\repos\MessageProcessor\Screen:C:\app
+      - C:\Users\Kennie\onecoremsvsmon:C:\remote_debugger:ro
+#$nuget_volume_mapping_screen$
+    entrypoint: C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "\"C:\\Program Files\\dotnet\\dotnet.exe\""
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_screen$ bin\\Debug\\netcoreapp2.0\\Screen.dll"
+      com.microsoft.visualstudio.debuggee.workingdirectory: "C:\\app"
+      com.microsoft.visualstudio.debuggee.killprogram: "C:\\remote_debugger\\x64\\utils\\KillProcess.exe dotnet.exe"
+

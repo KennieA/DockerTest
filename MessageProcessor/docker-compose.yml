@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  messageprocessor:
+    image: messageprocessor
+    deploy:
+      replicas: 2
+    build:
+      context: .
+      dockerfile: MessageProcessor\Dockerfile
+
+  admin:
+    image: admin
+    build:
+      context: .
+      dockerfile: Admin\Dockerfile
+
+
+  api:
+    image: api
+    build:
+      context: .
+      dockerfile: api\Dockerfile
+
+
+  screen:
+    image: screen
+    build:
+      context: .
+      dockerfile: Screen\Dockerfile
+
+
+  messageapi:
+    image: messageapi
+    build:
+      context: .
+      dockerfile: MessageApi\Dockerfile
+

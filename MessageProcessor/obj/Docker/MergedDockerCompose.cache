@@ -1,0 +1,53 @@
+networks:
+  default:
+    external:
+      name: nat
+services:
+  admin:
+    build:
+      context: C:\Users\Kennie\source\repos\MessageProcessor
+      dockerfile: Admin\Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: admin
+    ports:
+    - 80/tcp
+  api:
+    build:
+      context: C:\Users\Kennie\source\repos\MessageProcessor
+      dockerfile: api\Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: api
+    ports:
+    - 80/tcp
+  messageapi:
+    build:
+      context: C:\Users\Kennie\source\repos\MessageProcessor
+      dockerfile: MessageApi\Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: messageapi
+    ports:
+    - 80/tcp
+  messageprocessor:
+    build:
+      context: C:\Users\Kennie\source\repos\MessageProcessor
+      dockerfile: MessageProcessor\Dockerfile
+    deploy:
+      replicas: 2
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: messageprocessor
+    ports:
+    - 80/tcp
+  screen:
+    build:
+      context: C:\Users\Kennie\source\repos\MessageProcessor
+      dockerfile: Screen\Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: screen
+    ports:
+    - 80/tcp
+version: '3.0'
